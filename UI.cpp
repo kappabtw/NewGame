@@ -1,17 +1,17 @@
 #pragma once
 #include "UI.h"
 
-const std::string StartGame::State()
+const std::string StartGameUI::State()
 {
     return "StartUI";
 }
 
-void StartGame::Dialog()
+void StartGameUI::Dialog()
 {
     std::cout<<"\nNew Game?";
 }
 
-void StartGame::Draw()
+void StartGameUI::Draw()
 {
     Dialog();
     system("pause");

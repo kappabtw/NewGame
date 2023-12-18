@@ -12,7 +12,7 @@ class UI
 
 };
 
-class StartGame: public UI
+class StartGameUI: public UI
 {
     public:
         const std::string State() override;
@@ -39,7 +39,7 @@ class Maze: public UI
 
 };
 
-class EndGame: public UI
+class EndGameUI: public UI
 {
     public:
         const std::string State() override;

@@ -1,10 +1,10 @@
 #pragma once
-#include "UserInput.h"
+#include "GameLoop.cpp"
 #include <iostream> 
 #include <windows.h>
 #include <conio.h>
-using namespace std;
-const std::string ButtomPress::KeyPressed()
+
+const std::string GameLoop::CommandParser::ButtomPress::KeyPressed()
 {
     while (true)
     {
@@ -21,25 +21,10 @@ const std::string ButtomPress::KeyPressed()
                         break;
                 case 100: //вправо
                     return "RIGHT";
-                case 27:
+                case 27: //выход
                     return "EXIT";
                 }
         
         }
     }
-}
-
-const std::string State()
-{
-    return "ButtomPress";
-}
-
-int main()
-{
-    ButtomPress Key;
-    while(true)
-    {
-    std::cout<<Key.KeyPressed();
-    }
-    system("pause");
 }
