@@ -1,5 +1,5 @@
 #include "GameLoop.h"
-#include "CommandParser.cpp"
+#include "InputParser.cpp"
 
 void GameLoop::Play()
 {
