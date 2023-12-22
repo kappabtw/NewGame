@@ -1,10 +1,10 @@
 #pragma once
-#include "GameLoop.cpp"
+#include "GameLoop.h"
 #include <iostream> 
 #include <windows.h>
 #include <conio.h>
 
-const std::string GameLoop::CommandParser::ButtomPress::KeyPressed()
+const std::string GameLoop::InputParser::ButtonPress::KeyPressed()
 {
     while (true)
     {

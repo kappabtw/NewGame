@@ -1,45 +1,59 @@
-#include "UI.cpp"
+#pragma once
+#include "EndGame.h"
+#include "StartGame.h"
+#include "map.h"
+#include "Person.h"
+#include "Objects.h"
+#include "Maze.cpp"
+
 class GameLoop
 {
     public:
-        GameLoop(Mape GameMape, Person GamePerson, Key GameKey, Exit GameExit, Maze GameMaze);
-        void StartGame();
+        void Play();
     private:
 
-        class CommandParser
+        class InputParser
         {
             public:
-                CommandParser(Mape GameMape, Person GamePerson, Key GameKey, Exit GameExit, Maze GameMaze);
-                void MovePlayer();
-                const bool PlayerOnExit();
+                InputParser(Map& GameMap, Person& GamePerson, Key& GameKey, Door& GameDoor, Maze& GameMaze);
+                ~InputParser()
+                {
+                   delete[] Collision; 
+                };
+                const bool MovePlayer();
             private:
-                class ButtomPress
+
+                class ButtonPress
                 {
                     public:
                         const std::string KeyPressed();
                 };
+
                 class PlayerCollision
                 {
                     public: 
-                        PlayerCollision(Mape GameMape, Person GamePerson, Exit GameExit);
+                        PlayerCollision(Map& GameMap, Person& GamePerson, Key& GameKey, Door& GameDoor);
                         const bool CanMove(std::string coord, int value_change);
                     private:
                         std::vector<std::vector<int>> matrix;
-                        Mape somemape;
-                        Person someperson{somemape};
-                        Exit someexit{somemape};
+                        Map *somemap;
+                        Person *someperson;
+                        Door *somedoor;
+                        Key *somekey;
                 };
-                ButtomPress Press;
-                StartGameUI StartUI;
-                Mape somemape;
-                Person someperson{somemape};
-                Key somekey{somemape};
-                Exit someexit{somemape};
-                PlayerCollision Collision{somemape, someperson, someexit};
-                Maze somemaze{somemape,someperson,somekey,someexit};
+                ButtonPress Press;
+                PlayerCollision *Collision;
+                Map *somemap;
+                Person *someperson;
             
         };
-
-        CommandParser *Command;
+    Map GameMap;
+    Person GamePerson{GameMap};
+    Key GameKey{GameMap};
+    Door GameDoor{GameMap};
+    Maze GameMaze{GameMap,GamePerson,GameKey,GameDoor};
+    InputParser Command{GameMap, GamePerson, GameKey, GameDoor, GameMaze};
+    StartGame Start;
+    EndGame End;
 
 };

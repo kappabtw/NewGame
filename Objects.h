@@ -4,7 +4,7 @@
 class Key: public IObject
 {
     public:
-        Key(Mape GameMape):IObject(GameMape){};
+        Key(Map& GameMap):IObject(GameMap){};
         const std::string State()
         {
             return "Key";
@@ -17,10 +17,10 @@ class Key: public IObject
        static const int ValueInMatrix = 8;
 };
 
-class Exit: public IObject
+class Door: public IObject
 {
     public:
-        Exit(Mape GameMape):IObject(GameMape){};
+        Door(Map& GameMap):IObject(GameMap){};
         const std::string State()
         {
             return "Exit";

@@ -1,43 +1,50 @@
 #include "GameLoop.h"
+#include "PlayerCollision.cpp"
+#include "ButtonPress.cpp"
 
-GameLoop::CommandParser::CommandParser(Mape GameMape, Person GamePerson, Key GameKey, Exit GameExit, Maze GameMaze)
+GameLoop::InputParser::InputParser(Map& GameMap, Person& GamePerson, Key &GameKey, Door& GameDoor, Maze& GameMaze)
 {
-    this->somemape = GameMape;
-    this->someperson = GamePerson;
-    this->somekey = GameKey;
-    this->someexit = GameExit;
-    this->somemaze = GameMaze;
+    someperson = &GamePerson;
+    Collision = new PlayerCollision{GameMap, GamePerson, GameKey, GameDoor};
 }
-
-void GameLoop::CommandParser::MovePlayer()
+const bool GameLoop::InputParser::MovePlayer()
 {
-    std::string DIRECTION = Press.KeyPressed();
+    const std::string DIRECTION = Press.KeyPressed();
     if (DIRECTION == "UP")
     {
-        if (Collision.CanMove("Y", 1))
-        {
-            someperson.PositionY(1);
+        if (Collision->CanMove("Y", -1))
+        {   
+            someperson->PositionY(-1);
+            return true;
         }
     }
     else if (DIRECTION == "LEFT")
     {
-        if (Collision.CanMove("X", -1))
+        if (Collision->CanMove("X", -1))
         {
-            someperson.PositionY(-1);
+            someperson->PositionX(-1);
+            return true;
         }
     }
     else if (DIRECTION == "DOWN")
     {
-        if (Collision.CanMove("Y", -1))
+        if (Collision->CanMove("Y", 1))
         {
-            someperson.PositionY(-1);
+            someperson->PositionY(1);
+            return true;
         }
     }
     else if (DIRECTION == "RIGHT")
     {
-        if (Collision.CanMove("X", 1))
+        if (Collision->CanMove("X", 1))
         {
-            someperson.PositionY(1);
+            someperson->PositionX(1);
+            return true;
         }
     }
+    else if (DIRECTION == "EXIT")
+    {
+        exit(0);
+    }
+    return false;
 }

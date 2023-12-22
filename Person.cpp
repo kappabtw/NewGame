@@ -1,4 +1,3 @@
-#pragma once
 #include "Person.h"
 
 const int Person::PositionX(int Change = 0)
@@ -18,11 +17,11 @@ const std::string Person::Icon()
     return "O";
 }
 
-Person::Person(Mape GameMape)
+Person::Person(Map& GameMap)
 {
-    this->somemape = &GameMape;
+    this->somemap = &GameMap;
     std::vector<std::vector<int>> matrix;
-    matrix = somemape->GetMape();
+    matrix = somemap->GetMap();
     for (int y = 0; y<matrix.size(); y++)
     {
         for (int x = 0; x<matrix[y].size(); x++)

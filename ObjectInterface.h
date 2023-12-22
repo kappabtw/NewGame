@@ -1,15 +1,15 @@
 #pragma once
 #include <iostream>
-#include "Mape.cpp"
+#include "Map.h"
 
 class IObject
 {
     public:
-        IObject(Mape GameMape)
+        IObject(Map& GameMap)
         {
-            this->somemape = &GameMape;
+            this->somemap = &GameMap;
             std::vector<std::vector<int>> matrix;
-            matrix = somemape->GetMape();
+            matrix = somemap->GetMap();
             for (int y = 0; y<matrix.size(); y++)
             {
                 for (int x = 0; x<matrix[y].size(); x++)
@@ -24,7 +24,9 @@ class IObject
             Used = false;
         }
 
+        virtual const std::string Icon() = 0;
         virtual const std::string State() = 0;
+
         const int PositionX()
         {
             return pos_x;
@@ -35,7 +37,6 @@ class IObject
             return pos_y;
         }
 
-        virtual const std::string Icon() = 0;
         const bool IsUsed()
         {
             return Used;
@@ -47,7 +48,7 @@ class IObject
         }
 
     protected:
-        Mape *somemape;
+        Map *somemap;
         bool Used;
         int pos_x;
         int pos_y;

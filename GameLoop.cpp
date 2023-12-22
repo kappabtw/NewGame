@@ -1,20 +1,16 @@
 #include "GameLoop.h"
+#include "CommandParser.cpp"
 
-GameLoop::GameLoop(Mape GameMape, Person GamePerson, Key GameKey, Exit GameExit, Maze GameMaze)
+void GameLoop::Play()
 {
-    this->Command = new CommandParser{GameMape, GamePerson, GameKey, GameExit, GameMaze};
-    /*this->somemape = GameMape;
-    this->someperson = GamePerson;
-    this->somekey = GameKey;
-    this->someexit = GameExit;
-    this->somemaze = GameMaze;*/
-}
-
-void GameLoop::StartGame()
-{
-    bool GameIsEnd = false;
-    while (!GameIsEnd)
+    Start.Draw();
+    GameMaze.Draw();
+    while (!GameDoor.IsUsed())
     {
-
+        if (Command.MovePlayer())
+        {
+            GameMaze.Draw();
+        }
     }
+    End.Draw();
 }
